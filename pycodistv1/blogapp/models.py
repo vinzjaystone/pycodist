@@ -26,12 +26,16 @@ class Article(models.Model):
     # Title of the Article
     title = models.CharField(max_length=100)
     # The owner/publisher of this article
-    author = models.ForeignKey(Account, on_delete=models.CASCADE)
+    # author = models.ForeignKey(Account, on_delete=models.CASCADE)
+    author = models.IntegerField()
     # The date this Article was created and published
     published_date = models.CharField(max_length=20)
 
-    def get_author(self):
-        return f"Author: {self.author}"
+    # def get_author(self):
+    #     return f"Author: {self.author}"
+
+    def getinfo(self):
+        return f"Title: {self.title} - Published by : {self.author.name}"
 
 class Comment(models.Model):
     # The article where this comment is placed

@@ -1,0 +1,11 @@
+<h3>BlogApp_Index.html</h3>
+{% if article_list %}
+    <ul>
+    {% for article in article_list %}
+        <li>{{ article.title }} - {{ article.author }}</li>
+        <br>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No articles are available.</p>
+{% endif %}

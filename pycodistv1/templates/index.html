@@ -1,1 +1,149 @@
-<h1>HELLO WORLD FROM INDEX.HTML</h1>
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>User Profile</title>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            padding-top: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .container2 {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            margin-top: 100px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info h4 {
+            margin-left: 10px;
+        }
+
+        .logout-button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            /* added to remove underline */
+        }
+
+        .content {
+            line-height: 1.6;
+        }
+
+        .login-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .login-button:hover {
+            background-color: #45a049;
+        }
+
+        .container3 {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px;
+            margin-top: 100px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header2 {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% block content %}
+    {% if user.is_authenticated %}
+    <!-- <h4>Hello {{ user.username }}</h4> -->
+    <div class="container">
+        <div class="header">
+            <div class="user-info">
+                <div class="avatar"></div>
+                <h4>Username : {{ user.username }}</h4>
+                <h4>ID : {{ user.id }}</h4>
+            </div>
+            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+
+        </div>
+
+        <div class="content">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur euismod sagittis.
+                Proin vulputate urna vel elit semper, sed tempor elit convallis. Mauris mattis, felis vel
+                gravida gravida, sem felis varius arcu, sed suscipit nulla neque ac libero.
+            </p>
+            <p>
+                Pellentesque eu dui ut enim pretium euismod ut et lectus. Integer dapibus sem non enim
+                volutpat, eu consectetur lorem lacinia. Aenean tristique erat dolor, sed sollicitudin
+                magna gravida nec. Ut euismod nisi et tortor fermentum, a feugiat odio maximus.
+            </p>
+            <p>
+                Aliquam sit amet iaculis lacus. Nunc bibendum ex vel eleifend elementum. Vivamus
+                tincidunt lectus in cursus efficitur. Duis vehicula auctor arcu, non lobortis sem
+                tristique ut.
+            </p>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="container3">
+        <h2 class="header2">You are not logged in.</h2>
+        <a href="{% url 'login' %}" class="login-button">Login</a>
+    </div>
+    {% endif %}
+    {% endblock %}
+</body>
+
+</html>

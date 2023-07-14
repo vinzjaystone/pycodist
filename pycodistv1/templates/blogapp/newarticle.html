@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+  <title>My Page Title</title>
+  <meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <style>
+  </style>
+
+</head>
+
+<h1>NEWARTICLE.html</h1>
+
+{% block content %}
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'blogapp:newarticle' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+{% else %}
+<h1>NOT LOGIN</h1>
+{% endif %}
+{% endblock %}
