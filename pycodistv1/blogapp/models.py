@@ -35,7 +35,7 @@ class Article(models.Model):
     #     return f"Author: {self.author}"
 
     def getinfo(self):
-        return f"Title: {self.title} - Published by : {self.author.name}"
+        return [self.title, self.author]
 
 class Comment(models.Model):
     # The article where this comment is placed

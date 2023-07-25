@@ -21,7 +21,10 @@ def detailarticle(request, article_id):
 
     print(f"ERROR : {article}")
 
-    detail = article.getinfo()
+    info = article.getinfo()
+    title = info[0]
+    author = get_object_or_404(Account, pk=info[1])
+    detail = f"Title: {title} - Author : {author.name}"
     return render(request, "blogapp/detail.html", {"detail": detail})
 
 def changealias(request, account_id, alias):
@@ -42,15 +45,20 @@ def newarticle(request):
             print("FORM IS VALID...")
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
-
-            author = Account.objects.get(request.user.id)
-            
-            print(f"TITLE : {title} - CONTENT : {content} - AUTHOR : {author}")
-            nArticle = Article()
-            nArticle.title = title
-            nArticle.content = content
-            nArticle.author = author
-            nArticle.save()
+            try:
+                print("USER ID ")
+                print(title, content)
+                author = Account.objects.get(request.user.id)
+                print("================================")            
+                
+                print(f"TITLE : {title} - CONTENT : {content} - AUTHOR : {author}")
+                nArticle = Article()
+                nArticle.title = title
+                nArticle.content = content
+                nArticle.author = author
+                nArticle.save()
+            except TypeError as e:
+                print(e)
             return render(request, 'blogapp/success.html')
     else:
         if request.user.is_authenticated:
